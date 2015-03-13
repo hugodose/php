@@ -9,7 +9,7 @@ if (isset($_SERVER['SERVER_SOFTWARE']) &&
 strpos($_SERVER['SERVER_SOFTWARE'],'Google App Engine') !== false) {
   // Connect from App Engine.
   try{
-     $db = new pdo('mysql:unix_socket=/cloudsql/<your-project-id>:<your-instance-name>;dbname=guestbook', 'root', '');
+     $db = new pdo('mysql:unix_socket=/cloudsql/hazel-proxy-88217:jogo;dbname=MinhaDB', 'root', '');
   }catch(PDOException $ex){
       die(json_encode(
           array('outcome' => false, 'message' => 'Unable to connect.')
@@ -19,7 +19,7 @@ strpos($_SERVER['SERVER_SOFTWARE'],'Google App Engine') !== false) {
 } else {
   // Connect from a development environment.
   try{
-     $db = new pdo('mysql:host=127.0.0.1:3306;dbname=guestbook', 'root', '<password>');
+     $db = new pdo('mysql:host=127.0.0.1:3306;dbname=MinhaDB', 'root', '');
   }catch(PDOException $ex){
       die(json_encode(
           array('outcome' => false, 'message' => 'Unable to connect')
@@ -29,7 +29,7 @@ strpos($_SERVER['SERVER_SOFTWARE'],'Google App Engine') !== false) {
 }
 try {
   if (array_key_exists('content', $_POST)) {
-    $stmt = $db->prepare('INSERT INTO entries (guestName, content) VALUES (:name, :content)');
+    $stmt = $db->prepare('INSERT INTO person (FNAME, LNAME) VALUES (:name, :content)');
     $stmt->execute(array(':name' => htmlspecialchars($user->getNickname()), ':content' => htmlspecialchars($_POST['content'])));
     $affected_rows = $stmt->rowCount();
     // Log $affected_rows.
