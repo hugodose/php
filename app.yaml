@@ -4,5 +4,7 @@ runtime: php
 api_version: 1
 
 handlers:
-- url: /.*
-  script: index.php
+- url: /
+  script: guestbook.php
+- url: /sign
+  script: sign.php
