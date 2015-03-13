@@ -21,7 +21,7 @@ if (!$user) {
   strpos($_SERVER['SERVER_SOFTWARE'],'Google App Engine') !== false) {
     // Connect from App Engine.
     try{
-       $db = new pdo('mysql:unix_socket=/cloudsql/<your-project-id>:<your-instance-name>;dbname=guestbook', 'root', '');
+       $db = new pdo('mysql:unix_socket=/cloudsql/hazel-proxy-88217:jogo;dbname=MinhaDB', 'root', '');
     }catch(PDOException $ex){
         die(json_encode(
             array('outcome' => false, 'message' => 'Unable to connect.')
@@ -31,7 +31,7 @@ if (!$user) {
   } else {
     // Connect from a development environment.
     try{
-       $db = new pdo('mysql:host=127.0.0.1:3306;dbname=guestbook', 'root', '<password>');
+       $db = new pdo('mysql:host=127.0.0.1:3306;dbname=MinhaDB', 'root', '');
     }catch(PDOException $ex){
         die(json_encode(
             array('outcome' => false, 'message' => 'Unable to connect')
@@ -41,8 +41,8 @@ if (!$user) {
   }
   try {
     // Show existing guestbook entries.
-    foreach($db->query('SELECT * from entries') as $row) {
-            echo "<div><strong>" . $row['guestName'] . "</strong> wrote <br> " . $row['content'] . "</div>";
+    foreach($db->query('SELECT * from person') as $row) {
+            echo "<div><strong>" . $row['FNAME'] . "</strong> wrote <br> " . $row['LNAME'] . "</div>";
      }
   } catch (PDOException $ex) {
     echo "An error occurred in reading or writing to guestbook.";
