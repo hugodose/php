@@ -1,19 +1,19 @@
 <?php
-use google\appengine\api\users\User;
-use google\appengine\api\users\UserService;
+//use google\appengine\api\users\User;
+//use google\appengine\api\users\UserService;
 
-$user = UserService::getCurrentUser();
+//$user = UserService::getCurrentUser();
 
-if (!$user) {
-  header('Location: ' . UserService::createLoginURL($_SERVER['REQUEST_URI']));
-}
+//if (!$user) {
+//  header('Location: ' . UserService::createLoginURL($_SERVER['REQUEST_URI']));
+//}
 ?>
 
 <html>
  <body>
   <h2>Guestbook Entries</h2>
   <?php
-  echo 'Hello, ' . htmlspecialchars($user->getNickname());
+  //echo 'Hello, ' . htmlspecialchars($user->getNickname());
 
   // Create a connection.
   $db = null;
@@ -52,6 +52,7 @@ if (!$user) {
 
   <h2>Sign the Guestbook</h2>
   <form action="/sign" method="post">
+    <div><textarea name="name" rows="3" cols="60"></textarea></div>
     <div><textarea name="content" rows="3" cols="60"></textarea></div>
     <div><input type="submit" value="Sign Guestbook"></div>
   </form>
